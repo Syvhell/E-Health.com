@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>QSU E-Health Services</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/qsu-logo.png')}}" rel="icon">
+  <link href="{{ url_for('static', filename='img/qsu-logo.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap3.min.css.map')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap3.min.css.map')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.cs')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">Healthservices.diffun@qsu.edu.ph</a>
+        <i class="bi bi-phone"></i> +639162750574
+      </div>
+      <div class="d-none d-lg-flex social-links align-items-center">
+
+        <a href="https://www.facebook.com/qsudiffunhealthservices" class="facebook"><i class="bi bi-facebook"></i></a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+      <a href="#" class="logo "><img src="{{ url_for('static', filename='img/qsu-logo.png')}}" alt=""
+          class="img-fluid"></a>
+      <h1 class="logo me-auto text-success">QSU E-Health Services </h1>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
+          <li><a class="nav-link scrollto" href="#doctors">Health Personels</a></li>
+          <li><a class="nav-link scrollto" href="#facilities">Facilities</a></li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <div class="dropdown">
+            <button class="appointment-btn" onclick="toggleDropdown()">Sign In</button>
+            <div class="dropdown-menu" id="myDropdown">
+              <li><a class="dropdown-item" href="/student/login">Student Sign In</a></li>
+              <li><a class="dropdown-item" href="/faculty/login">Faculty/Staff Sign In</a></li>
+            </div>
+
+
+            <script>
+              function toggleDropdown() {
+                var dropdown = document.getElementById("myDropdown");
+                dropdown.classList.toggle("show");
+              }
+            </script>
+            <style>
+              /* Style the dropdown container */
+              .dropdown {
+                position: relative;
+                display: inline-block;
+              }
+
+              /* Style the dropdown content (hidden by default) */
+              .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+              }
+
+              /* Style the links inside the dropdown */
+              .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+              }
+
+              /* Change the background color on hover */
+              .dropdown-content a:hover {
+                background-color: #f1f1f1;
+              }
+
+              /* Show the dropdown menu when the button is clicked */
+              .show {
+                display: block;
+              }
+            </style>
+          </div>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container">
+      <h1 class="text-light">QSU E-Health Services</h1>
+      <h2 class="text-light">We are team of professionals to aid you</h2>
+      <a href="#footer" class="btn-get-started scrollto">Get Started</a>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="content">
+              <h3>QSU E-Health Services</h3>
+              <p>
+                QSU School E-Health services is a facility and working agency that provide health related amenities to
+                students, faculty, staff, and community. The School Health Amenity under the Office of Student Affairs
+                and Services is composed of the medical and dental services. It is provided through the school system
+                that aimed to improves the health and well-being of the student, clients and in some cases the whole
+                families and the broader community
+              </p>
+              <div class="text-center">
+                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-receipt"></i>
+                    <h4>Mission</h4>
+                    <p>"The Health Services of QUIRINO STATE UNIVERSITY shall ensure and effective, efficient and
+                      relevant health care system" </p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-images"></i>
+                    <h4>Vision</h4>
+                    <p>"The Health Services envisions for healthy environment with physically fit populace essential in
+                      the fulfillment of their respective mandates."</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-cube-alt"></i>
+                    <h4>Goal/Objectives</h4>
+
+                    <p>1. "To provide quality and relevant health care services."
+                      <br>2. "To prevent diseases and promote healthy condition of individual and sanitary environment."
+                      <br>3. "To enrich medical personnel."
+                      <br>4. "Provide Extension Services"
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Information</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-heartbeat"></i></div>
+              <h4><a href="">Dental Check Up</a></h4>
+              <p>"Routine appointment when the dentist checks on your dental condition, does a thorough cleaning and
+                gives advice on how to maintain good oral hygiene."</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-pills"></i></div>
+              <h4><a href="">Medical Check Up</a></h4>
+              <p>"This is done to keep a track on the body, maintaining its normal function and detect any disease, if
+                any."</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-hospital-user"></i></div>
+              <h4><a href="">Consultation</a></h4>
+              <p>"Include taking preventive measures to halt the development of various diseases particularly for
+                patients who have risk factors."</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-dna"></i></div>
+              <h4><a href="">P.T Services</a></h4>
+              <p>"Are lab-quality urine tests with a 99% accuracy rate. They detect the levels of the pregnancy hormone
+                known as hCG, human chorionic gonadotropin, in your urine."</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-wheelchair"></i></div>
+              <h4><a href="">Family Planning</a></h4>
+              <p>"Having the desired number of children and when you want to have them by using safe and effective
+                modern methods."</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-notes-medical"></i></div>
+              <h4><a href="">Health Counseling</a></h4>
+              <p>"Counseling focuses on natural stresses and issues with life, like grief, depression, and needing
+                someone to talk to."</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
+
+    <!-- ======= Departments Section ======= -->
+    <section id="facilities" class="departments">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Facilities</h2>
+          <p>Information needed for this section</p>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Medical</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Dental</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Consultation</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-9">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row gy-4">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Medical</h3>
+                    <p class="fst-italic">Information needed for this section</p>
+                    <p>Information needed for this section and others that is applicable</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{ url_for('static', filename='img/departments-1.jpg')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-2">
+                <div class="row gy-4">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Dental</h3>
+                    <p class="fst-italic">Information needed for this section</p>
+                    <p>Information needed for this section and others that is applicable</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{ url_for('static', filename='img/departments-2.jpg')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-3">
+                <div class="row gy-4">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Consultation</h3>
+                    <p class="fst-italic">Information needed for this section</p>
+                    <p>Information needed for this section and others that is applicable</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{ url_for('static', filename='img/departments-3.jpg')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-4">
+                <div class="row gy-4">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Information needed for this section</h3>
+                    <p class="fst-italic">Totam aperiam accusamus. Repellat consequuntur iure voluptas iure porro quis
+                      delectus</p>
+                    <p>Information needed for this section and others that is applicable</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{ url_for('static', filename='img/departments-4.jpg')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab-5">
+                <div class="row gy-4">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Est eveniet ipsam sindera pad rone matrelat sando reda</h3>
+                    <p class="fst-italic">Information needed for this section</p>
+                    <p>Information needed for this section and others that is applicable</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{ url_for('static', filename='img/departments-5.jpg')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Departments Section -->
+
+    <!-- ======= Doctors Section ======= -->
+    <section id="doctors" class="doctors">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Health Personels</h2>
+          <p>Information needed for this section</p>
+        </div>
+
+        <div class="row">
+          {% for User in staff %}
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid"
+                  alt=""></div>
+              <div class="member-info">
+                <h4>{{User.extensione}} {{User.First_name}} {{User.Middle_name}} {{User.Last_name}}</h4>
+                <span></span>
+                <p></p>
+
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% for Users in docs %}
+          <div class="col-lg-6">
+            <div class="member d-flex align-items-start">
+              <div class="pic"><img src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid"
+                  alt=""></div>
+              <div class="member-info">
+                <h4>{{Users.Fullname}}</h4>
+                <span></span>
+                <p></p>
+
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Doctors Section -->
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Information needed in this section</p>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row g-0">
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-1.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-1.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-2.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-2.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-3.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-3.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-4.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-4.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-5.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-5.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-6.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-6.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-7.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-7.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{ url_for('static', filename='img/gallery/gallery-8.jpg')}}" class="galelry-lightbox">
+                <img src="{{ url_for('static', filename='img/gallery/gallery-8.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Information needed in this section.</p>
+        </div>
+      </div>
+
+      <div>
+        <iframe style="border:0; width: 100%; height: 350px;"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3823.5187201940103!2d121.5041733147852!3d16.600715988554473!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33900c24ef6ec685%3A0x2735a7478afb177!2sQuirino%20State%20University%2C%20Main%20Campus%2C!5e0!3m2!1sen!2sph!4v1667532704712!5m2!1sen!2sph"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div class="container">
+        <div class="row mt-5">
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>Andres Bonifacio , Diffun, Quirino</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <div class="info">
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>Healthservices.diffun@qsu.edu.ph</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <div class="info">
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+639162750574</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h3>QSU Clinic-Diffun</h3>
+            <p>
+              Andres Bonifacio <br>
+              Diffun, Quirino<br>
+              Philippines <br><br>
+              <strong>Phone:</strong> +639162750574<br>
+              <strong>Email:</strong> Healthservices.diffun@qsu.edu.ph<br>
+            </p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Dental Check Up</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Medical Check Up</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Consultation</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">P.T Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Family Planning</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Health Counseling</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Make Appointment Now</h4>
+            <p>Information needed in this section</p>
+            <div class="dropdown1">
+              <button class="appointment-btn" onclick="toggleDropdown1()">Sign In</button>
+              <div class="dropdown-menu" id="myDropdown1">
+                <li><a class="dropdown-item" href="/student/login" style="color: green;">Student Sign In</a></li>
+                <li><a class="dropdown-item" href="/faculty/login" style="color: green;">Faculty/Staff Sign In</a></li>
+              </div>
+
+              <script>
+                function toggleDropdown1() {
+                  var dropdown1 = document.getElementById("myDropdown1");
+                  dropdown1.classList.toggle("show1");
+                }
+              </script>
+
+              <style>
+                /* Style the dropdown container */
+                .dropdown1 {
+                  position: relative;
+                  display: inline-block;
+                }
+
+                /* Style the dropdown content (hidden by default) */
+                .dropdown-content {
+                  display: none;
+                  position: absolute;
+                  background-color: #f9f9f9;
+                  min-width: 160px;
+                  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                  z-index: 1;
+                }
+
+                /* Style the links inside the dropdown */
+                .dropdown-content a {
+                  color: black;
+                  padding: 12px 16px;
+                  text-decoration: none;
+                  display: block;
+                }
+
+                /* Change the background color on hover */
+                .dropdown-content a:hover {
+                  background-color: #f1f1f1;
+                }
+
+                /* Show the dropdown menu when the button is clicked */
+                .show1 {
+                  display: block;
+                }
+              </style>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+      <div class="me-md-auto text-center text-md-start">
+        <div class="copyright">
+          &copy; Copyright <strong><span>Qurinino State University</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">Group3 Made Z</a>
+        </div>
+      </div>
+      <div class="social-links text-center text-md-right pt-3 pt-md-0">
+        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+
+</body>
+
+</html>

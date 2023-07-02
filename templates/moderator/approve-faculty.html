@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.png')}}">
+  <title>E-Health</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css')}}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/datatables/datatables.min.css')}}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/feather/feather.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/style.css')}}">
+</head>
+
+<body>
+  <div class="main-wrapper">
+    <div class="header">
+      <div class="header-left">
+        <a href="" class="logo">
+          <img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span
+            style="font-weight:bold;">E-Health</span>
+        </a>
+      </div>
+      <a id="toggle_btn" href="javascript:void(0);"><img
+          src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+      <a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img
+          src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+      <div class="top-nav-search mob-view">
+
+      </div>
+      <ul class="nav user-menu float-end">
+        <li class="nav-item dropdown d-none d-sm-block">
+          <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img
+              src="{{ url_for('static', filename='assets/img/icons/note-icon-01.svg')}}" alt=""><span
+              class="pulse"></span> </a>
+          <div class="dropdown-menu notifications">
+            <div class="topnav-dropdown-header">
+              <span>Notifications</span>
+            </div>
+            <div class="drop-scroll">
+              <ul class="notification-list">
+                {% for User in Notification %}
+
+                {% if User.status1 == 6 %}<button class="custom-badge status-green ">
+                  <li class="notification-message">
+                    <a href="/moderator/patients">
+                      <div class="media">
+                        <span class="avatar">
+                          <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}"
+                            class="img-fluid">
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span>
+                            Appointment Has Been Rendered <span class="noti-title">{{User.Title}}</span></p>
+                          <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </button>{% else %}
+                {% endif %}
+
+                {% if User.status1 == 7 %}<button class="custom-badge status-orange ">
+                  <li class="notification-message">
+                    <a href="/moderator/appointments-due">
+                      <div class="media">
+                        <span class="avatar">
+                          <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}"
+                            class="img-fluid">
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span>
+                            Appointment is DUE<span class="noti-title">{{User.Title}}</span></p>
+                          <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </button>{% else %}
+                {% endif %}
+                {% if User.status1 == 5 %}<button class="custom-badge">
+                  <li class="notification-message">
+                    <a href="/moderator/appointments">
+                      <div class="media">
+                        <span class="avatar">
+                          <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}"
+                            class="img-fluid">
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span>
+                            Have Set a New Appointment <span class="noti-title">{{User.Title}}</span></p>
+                          <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </button>
+                {% else %}
+                {% endif %}
+                {% if User.status1 == 8 %}<button class="custom-badge status-pink ">
+                  <li class="notification-message">
+                    <a href="/moderator/appointments-canceled">
+                      <div class="media">
+                        <span class="avatar">
+                          <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}"
+                            class="img-fluid">
+                        </span>
+                        <div class="media-body">
+                          <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span>
+                            Canceled his/her Appointment <span class="noti-title">{{User.Title}}</span></p>
+                          <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </button>{% else %}
+                {% endif %}
+
+
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="topnav-dropdown-footer">
+              <a href="">View all Notifications</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown has-arrow user-profile-list">
+          <a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+            <div class="user-names">
+              <h5>{{ admin['extension'] }} {{ admin['First_name'] }} {{ admin['Middle_name'] }} {{ admin['Last_name'] }}
+              </h5>
+              <span>Moderator</span>
+            </div>
+            <span class="user-img">
+              <img src="{{ url_for('static', filename='')}}" alt="Admin">
+            </span>
+          </a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="/moderator/profile">My Profile</a>
+            <a class="dropdown-item" href="/moderator/edit-profile">Edit Profile</a>
+
+            <a class="dropdown-item" href="/moderator/logout">Logout</a>
+          </div>
+        </li>
+      </ul>
+      <div class="dropdown mobile-user-menu float-end">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i
+            class="fa-solid fa-ellipsis-vertical"></i></a>
+        <div class="dropdown-menu dropdown-menu-end">
+          <a class="dropdown-item" href="/moderator/profile">My Profile</a>
+          <a class="dropdown-item" href="/moderator/edit-profile">Edit Profile</a>
+
+          <a class="dropdown-item" href="/moderator/logout">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+          <ul>
+            <li class="menu-title">Main</li>
+            <li class="submenu">
+              <a href="#"><span class="menu-side"><img
+                    src="{{ url_for('static', filename='assets/img/icons/menu-icon-01.svg')}}" alt=""></span> <span>
+                  Dashboard </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="/moderator/dashboard">Moderator Dashboard</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><span class="menu-side"><img
+                    src="{{ url_for('static', filename='assets/img/icons/menu-icon-03.svg')}}" alt=""></span>
+                <span>Patients </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a class="active" href="/moderator/patients">Patients List</a></li>
+                <li><a href="/moderator/add-patient">Add Patients</a></li>
+                <li><a href="/moderator/add-visitor-patient">Add Visitor Patients</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><span class="menu-side"><img
+                    src="{{ url_for('static', filename='assets/img/icons/menu-icon-04.svg')}}" alt=""></span> <span>
+                  Appointments </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="/moderator/appointments">Appointment List</a></li>
+                <li><a href="/moderator/add-appointment">Set Date Unavailable</a></li>
+                <li><a href="/moderator/calendar">Calendar</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><span class="menu-side"><img
+                    src="{{ url_for('static', filename='assets/img/icons/menu-icon-12.svg')}}" alt=""></span> <span>
+                  Messages</span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="/moderator/compose">Compose Message</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><span class="menu-side"><img
+                    src="{{ url_for('static', filename='assets/img/icons/menu-icon-03.svg')}}" alt=""></span>
+                <span>Approve User</span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="/moderator/approve-student">Approve Student</a></li>
+                <li><a class="active" href="/moderator/approve-faculty">Approve Faculty/Staff</a></li>
+              </ul>
+            </li>
+            <li class="submenu">
+              <a href="#"><span class="menu-side"><img
+                    src="{{ url_for('static', filename='assets/img/icons/menu-icon-15.svg')}}" alt=""></span> <span>
+                  Announcements </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="/moderator/announcement">Create announcement</a></li>
+                <li><a href="/moderator/announcement-view">View Announcement</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="logout-btn">
+            <a href="/moderator/logout"><span class="menu-side"><img
+                  src="{{ url_for('static', filename='assets/img/icons/logout.svg')}}" alt=""></span>
+              <span>Logout</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="content">
+
+        <div class="page-header">
+          <div class="row">
+            <div class="col-sm-12">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/moderator/patients">Patients </a></li>
+                <li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+                <li class="breadcrumb-item active">Patient List</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card card-table show-entire">
+              <div class="card-body">
+
+                <div class="page-table-header mb-2">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <div class="doctor-table-blk">
+                        <h3>Faculty/Staff List</h3>
+                        <div class="doctor-search-blk">
+                          <div class="top-nav-search table-search-blk">
+                            <form>
+                              <input type="text" class="form-control" placeholder="Search here">
+                              <a class="btn"><img
+                                  src="{{ url_for('static', filename='assets/img/icons/search-normal.svg')}}"
+                                  alt=""></a>
+                            </form>
+                          </div>
+                          <div class="add-group">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="table-responsive">
+                  <table class="table mb-0 border-0 datatable custom-table" id="my-table">
+                    <thead>
+                      <tr>
+                        <th>ID-Number</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {% for User in approve %}
+                      {% if User.Userlevel_ID == 4 %}<tr>
+                        <td>{{User.idnumber}}</td>
+                        <td class="table-image">
+
+                          {{User.First_name}} {{User.Middle_name}} {{User.Last_name}}
+                        </td>
+                        <td>{{User.Course}} {{User.Year_level}}</td>
+                        <td>{% if User.status == 4 %}<button class="custom-badge status-green ">
+                            Approved
+                          </button>{% else %}<button class="custom-badge status-pink ">
+                            Not Approved
+                          </button>{% endif %}</td>
+                        <td class="text-end">
+                          <div class="dropdown dropdown-action">
+                            <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown"
+                              aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item" href="/moderator/approve-user-faculty/{{User.id}}"><i
+                                  class="fa-solid fa-pen-to-square m-r-5"></i> Approve </a>
+                              <a class="dropdown-item" href="/moderator/disapprove-user-faculty/{{User.id}}"><i
+                                  class="fa-solid fa-pen-to-square m-r-5"></i> Remove Access </a>
+                              <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-bs-target="#delete_patient"><i class="fa fa-trash-alt m-r-5"></i> Delete</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>{% else %}
+                      {% endif %}
+                      {% endfor %}
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notification-box">
+      <div class="msg-sidebar notifications msg-noti">
+        <div class="topnav-dropdown-header">
+          <span>Messages</span>
+        </div>
+        <div class="drop-scroll msg-list-scroll" id="msg_list">
+          <ul class="list-box">
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">R</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">Richard Miles </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item new-message">
+                  <div class="list-left">
+                    <span class="avatar">J</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">John Doe</span>
+                    <span class="message-time">1 Aug</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">T</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author"> Tarah Shropshire </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">M</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">Mike Litorus</span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">C</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author"> Catherine Manseau </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">D</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author"> Domenic Houston </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">B</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author"> Buster Wigton </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">R</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author"> Rolland Webber </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">C</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author"> Claire Mapes </span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">M</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">Melita Faucher</span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">J</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">Jeffery Lalor</span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">L</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">Loren Gatlin</span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="chat.html">
+                <div class="list-item">
+                  <div class="list-left">
+                    <span class="avatar">T</span>
+                  </div>
+                  <div class="list-body">
+                    <span class="message-author">Tarah Shropshire</span>
+                    <span class="message-time">12:28 AM</span>
+                    <div class="clearfix"></div>
+                    <span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="topnav-dropdown-footer">
+          <a href="chat.html">See all messages</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="delete_patient" class="modal fade delete-modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <img src="{{ url_for('static', filename='assets/img/sent.png')}}" alt="" width="50" height="46">
+          <h3>Are you sure want to delete this ?</h3>
+          <div class="m-t-20"> <a href="#" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="sidebar-overlay" data-reff=""></div>
+  <script data-cfasync="false"
+    src="{{ url_for('static', filename='../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/js/jquery-3.6.1.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/js/feather.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/js/jquery.slimscroll.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/plugins/datatables/datatables.min.js')}}"></script>
+  <script src="{{ url_for('static', filename='assets/js/app.js')}}"></script>
+</body>
+
+</html>

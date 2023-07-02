@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from preclinic.dreamguystech.com/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Apr 2023 00:51:45 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.png')}}">
+    <title>E-Health</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/feather/feather.css')}}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/style.css')}}">
+</head>
+
+<body>
+
+    <div class="main-wrapper login-body">
+        <div class="container-fluid px-0">
+            <div class="row">
+
+                <div class="col-lg-6 login-wrap">
+                    <div class="login-sec">
+                        <div class="log-img">
+                            <img class="img-fluid" src="{{ url_for('static', filename='assets/img/login-02.png')}}"
+                                alt="Logo">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-6 login-wrap-bg">
+                    <div class="login-wrapper">
+                        <div class="loginbox">
+                            <div class="login-right">
+                                <div class="login-right-wrap">
+                                    <div class="account-logo">
+                                        <h1><a href="">E-Health Services</a></h1>
+                                        <h2>Getting Started</h2>
+                                        {% if error %}
+                                        <p style="color:red;">{{ error }}</p>
+                                        {% endif %}
+                                        <div class="row">
+                                            <form action="/student/register/execute" method="post">
+                                                <div class="form-group">
+                                                    <label>ID-Number <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="idnumber"
+                                                        placeholder="10-00000" required>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-xl-6">
+                                                    <div class="form-group local-forms">
+                                                        <label>Course<span class="login-danger">*</span></label>
+                                                        <select class="form-control select" name="course" required>
+                                                            <option>Select Course</option>
+                                                            <option>Bachelor of Science in Information Technology
+                                                            </option>
+                                                            <option>Bachelor of Science in Office Administration
+                                                            </option>
+                                                            <option>Bachelor of Science in Nutrition and Dietetics
+                                                            </option>
+                                                            <option>Bachelor of Science in Agricultural and Bio-systems
+                                                                Engineering</option>
+                                                            <option>Bachelor of Science in Agriculture</option>
+                                                            <option>Bachelor of Science in Hospitality Management
+                                                            </option>
+                                                            <option>Bachelor of Science in Tourism Management</option>
+                                                            <option>Bachelor of Science in Criminology</option>
+                                                            <option>Bachelor of Secondary Education</option>
+                                                            <option>Bachelor of Technology and Livelihood Education
+                                                            </option>
+                                                            <option>Bachelor of Elementary Education</option>
+                                                            <option>Caregiving Course NCII</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-xl-6">
+                                                    <div class="form-group local-forms">
+                                                        <label>Year Level<span class="login-danger">*</span></label>
+                                                        <select class="form-control select" name="yearlevel" required>
+                                                            <option>1st Year</option>
+                                                            <option>2nd Year</option>
+                                                            <option>3rd Year</option>
+                                                            <option>4th Year</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group local-forms">
+                                                    <label>First Name <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="firstname" required>
+                                                </div>
+                                                <div class="form-group local-forms">
+                                                    <label>Middle Name <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="middlename">
+                                                </div>
+                                                <div class="form-group local-forms">
+                                                    <label>Last Name <span class="login-danger"
+                                                            style="color:red;font-size:12px;">(extension
+                                                            Jr./Sr.)*</span></label>
+                                                    <input class="form-control" type="text" name="lastname" required>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-xl-6">
+                                                    <div class="form-group local-forms">
+                                                        <label>Sex <span class="login-danger">*</span></label>
+                                                        <select class="form-control select" name="gender" required>
+                                                            <option>Select Gender</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Home Address <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="homeaddress" required>
+                                                </div>
+                                                <div class="col-12 col-md-6 col-xl-6">
+                                                    <div class="form-group local-forms">
+                                                        <label>Civil Status <span class="login-danger">*</span></label>
+                                                        <select class="form-control select" name="civilstatus" required>
+                                                            <option>Select Civil Status</option>
+                                                            <option>Single</option>
+                                                            <option>Married</option>
+                                                            <option>Widow</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Place of Birth <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="placeofbirth"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Birth Date <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="date" name="birthdate" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Mobile Number <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="number" name="mobile" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Boarding House Address <span
+                                                            class="login-danger">(NONE)*</span></label>
+                                                    <input class="form-control" type="text" name="boardinghouse"
+                                                        required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Nationality <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="nationality" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Religion <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="religion" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email <span class="login-danger">*</span></label>
+                                                    <input class="form-control" type="text" name="email" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Password <span class="login-danger">*</span></label>
+                                                    <input class="form-control pass-input" type="password" required>
+                                                    <span class="profile-views feather-eye-off toggle-password"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Confirm Password <span class="login-danger">*</span></label>
+                                                    <input class="form-control pass-input-confirm" type="password"
+                                                        name="password" required>
+                                                    <span class="profile-views feather-eye-off confirm-password"></span>
+                                                </div>
+
+                                                <div class="forgotpass">
+                                                    <div class="remember-me">
+                                                        <label class="custom_check mr-2 mb-0 d-inline-flex remember-me">
+                                                            I agree to the
+                                                            terms of service
+                                                            </a> and <a href="javascript:;" id="openModal">&nbsp
+                                                                privacy policy
+                                                            </a>
+                                                            <input type="checkbox" name="radio" required>
+                                                            <span class="checkmark"></span>
+
+                                                            <div id="myModal" class="modal">
+                                                                <div class="modal-content">
+                                                                    <span class="close">&times;</span>
+
+                                                                    <div class="privacy-notice">
+                                                                        <h3>PRIVACY NOTICE AND CONSENT</h3>
+                                                                        <p>
+                                                                            Quirino State University E-Health Services
+                                                                            respect and value your right to data
+                                                                            privacy. To pursue its
+                                                                            legitimate interests as an educational
+                                                                            institution, the Quirino State University
+                                                                            Clinic needs to
+                                                                            collect, use, and disclose some of your
+                                                                            personal information in adherence to
+                                                                            Republic Act No. 10173,
+                                                                            also known as the Data Privacy Act of 2012,
+                                                                            to ensure personal data protection.
+                                                                        </p>
+                                                                        <p>
+                                                                            This notice explains how the University
+                                                                            should manage your personal information from
+                                                                            collection to
+                                                                            disposal and obtain consent from you.
+                                                                        </p>
+                                                                        <p>
+                                                                            <b>INFORMATION COLLECTION, USE, AND
+                                                                                DISCLOSURE</b>
+                                                                            <br>
+                                                                            Structured forms, documents, and electronic
+                                                                            systems are designed to collect your
+                                                                            personal information
+                                                                            during admission, enrollment, residency, and
+                                                                            exit in the Quirino State University Clinic,
+                                                                            and other
+                                                                            relevant information, but not limited to:
+                                                                        </p>
+                                                                        <div class="tab">
+                                                                            <li>Personal Information which includes your
+                                                                                identity like name, nickname, address,
+                                                                                birthdate, place of
+                                                                                birth, age, gender, civil status,
+                                                                                contact details (such as mobile number
+                                                                                and email address), last
+                                                                                school attended, citizenship, religion,
+                                                                                ethnicity, spouse information, family
+                                                                                background,
+                                                                                educational background, and guardian's
+                                                                                information;</li>
+                                                                            <li>Medical records that consist of
+                                                                                appointments, treatments, and
+                                                                                consultations;</li>
+                                                                            <li>Medical records during your consultation
+                                                                                at the university clinic;</li>
+                                                                        </div>
+                                                                        <p>
+                                                                            The Quirino State University Clinic may
+                                                                            disclose your personal information to third
+                                                                            parties with your
+                                                                            consent or when required or allowed by law.
+                                                                            Such disclosure is subject to procedures to
+                                                                            ensure the
+                                                                            identity and legitimacy of the third party.
+                                                                        </p>
+                                                                        <p>
+                                                                            Your personal information is securely
+                                                                            stored, and access is limited to authorized
+                                                                            personnel with utmost
+                                                                            confidentiality. Rest assured that the
+                                                                            Quirino State University Clinic is
+                                                                            implementing reasonable and
+                                                                            appropriate organizational, physical, and
+                                                                            technical security measures to ensure the
+                                                                            protection of your
+                                                                            personal data.
+                                                                        </p>
+                                                                        <p>
+                                                                            The Quirino State University Clinic will
+                                                                            retain your personal information for a
+                                                                            period of time allowed
+                                                                            by law and/or University policy. Some of
+                                                                            your relevant personal information may be
+                                                                            retained indefinitely
+                                                                            for historical and statistical purposes. All
+                                                                            affected records that need to be disposed
+                                                                            will be destroyed
+                                                                            securely.
+                                                                        </p>
+                                                                        <p>
+                                                                            You have the right to request access to your
+                                                                            information and to update or correct your
+                                                                            personal
+                                                                            information. In accessing your own personal
+                                                                            information, the Quirino State University
+                                                                            Clinic will
+                                                                            require you to present your University ID or
+                                                                            other documents to confirm your identity. If
+                                                                            you wish to
+                                                                            access your personal information or request
+                                                                            documents through a representative, the
+                                                                            Quirino State
+                                                                            University Clinic will require you to
+                                                                            provide a Notarized Special Power of
+                                                                            Attorney and your valid ID
+                                                                            and a valid ID of your representative as
+                                                                            well.
+                                                                        </p>
+                                                                        <p>
+                                                                            Users accept the responsibility for
+                                                                            supplying, checking, and verifying the
+                                                                            accuracy and correctness of
+                                                                            the information they provide on this system
+                                                                            in connection with their application and
+                                                                            consent to the
+                                                                            collection and use of their personal
+                                                                            information.
+                                                                        </p>
+                                                                        <p>
+                                                                            DATA PRIVACY NOTICE
+                                                                            the QUIRINO STATE UNIVERSITY CLINIC will use
+                                                                            your Personal Information ONLY for MEDICAL
+                                                                            PURPOSES. By
+                                                                            using the Site and clicking the SUBMIT
+                                                                            button, you AGREE to the collection and use
+                                                                            of information in
+                                                                            accordance with the Data Privacy Act of
+                                                                            2012. Withholding or giving false
+                                                                            information will make you
+                                                                            ineligible for registration.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+
+                                                    <script>
+                                                        var modal = document.getElementById("myModal");
+                                                        var btn = document.getElementById("openModal");
+                                                        var span = document.getElementsByClassName("close")[0];
+
+                                                        btn.onclick = function () {
+                                                            modal.style.display = "block";
+                                                        }
+
+                                                        span.onclick = function () {
+                                                            modal.style.display = "none";
+                                                        }
+
+                                                        window.onclick = function (event) {
+                                                            if (event.target == modal) {
+                                                                modal.style.display = "none";
+                                                            }
+                                                        }
+                                                    </script>
+                                                    </label>
+                                                </div>
+                                        </div>
+                                        <div class="form-group login-btn">
+                                            <button class="btn btn-primary btn-block" type="submit">Sign
+                                                up</button>
+                                        </div>
+                                        </form>
+                                    </div>
+
+
+                                    <div class="next-sign">
+                                        <p class="account-subtitle">Already have account? <a
+                                                href="/student/login">Login</a></p>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='assets/js/jquery-3.6.1.min.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/feather.min.js')}}"></script>
+
+    <script src="{{ url_for('static', filename='assets/js/app.js')}}"></script>
+
+
+
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            display: inline-block;
+            margin-left: 3em;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Formal CSS */
+
+        h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tab li {
+            margin-bottom: 10px;
+        }
+
+        .privacy-notice {
+            margin-bottom: 40px;
+        }
+
+        .submit-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+
+
+</body>
+
+<!-- Mirrored from preclinic.dreamguystech.com/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Apr 2023 00:51:45 GMT -->
+
+</html>

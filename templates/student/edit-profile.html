@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.png')}}">
+<title>E-Health</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.cssg')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap-datetimepicker.min.css')}}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/feather/feather.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/style.css')}}">
+</head>
+<body>
+<div class="main-wrapper">
+<div class="header">
+<div class="header-left">
+<a href="" class="logo">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span style="font-weight:bold;">E-Health</span>
+</a>
+</div>
+<a id="toggle_btn" href="javascript:void(0);"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<div class="top-nav-search mob-view">
+</div>
+<ul class="nav user-menu float-end">
+<li class="nav-item dropdown d-none d-sm-block">
+<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img src="{{ url_for('static', filename='assets/img/icons/note-icon-01.svg')}}" alt=""><span class="pulse"></span> </a>
+<div class="dropdown-menu notifications">
+<div class="topnav-dropdown-header">
+<span>Notifications</span>
+</div>
+<div class="drop-scroll">
+<ul class="notification-list">
+{% for User in Notification %}
+
+  {% if User.status1 == 6 %}<button class="custom-badge status-green ">
+                              <li class="notification-message">
+                              <a href="/student/medical-history">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> Your Appointment Has Been Rendered <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+
+    {% if User.status1 == 7 %}<button class="custom-badge status-orange ">
+                              <li class="notification-message">
+                              <a href="">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You Appointment is DUE<span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+    {% if User.status1 == 5 %}<button class="custom-badge">
+                              <li class="notification-message">
+                              <a href="/student/appointments">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You have Set a New Appointment <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li></button>
+                            {% else %}
+        {% endif %}
+     {% if User.status1 == 8 %}<button class="custom-badge status-pink ">
+                              <li class="notification-message">
+                              <a href="/student/medical-history">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You Canceled Your Appointment <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+
+
+{% endfor %}
+</ul>
+</div>
+<div class="topnav-dropdown-footer">
+<a href="">View all Notifications</a>
+</div>
+</div>
+</li>
+<li class="nav-item dropdown has-arrow user-profile-list">
+<a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+<div class="user-names">
+<h5>{{ admin['First_name'] }} {{ admin['Middle_name'] }} {{ admin['Last_name'] }}  </h5>
+<span>Student</span>
+</div>
+<span class="user-img">
+<img src="{{ url_for('static', filename='assets/img/user.jpg')}}" alt="Admin">
+</span>
+</a>
+<div class="dropdown-menu">
+<a class="dropdown-item" href="/student/profile">My Profile</a>
+<a class="dropdown-item" href="/student/edit-profile">Edit Profile</a>
+
+<a class="dropdown-item" href="/student/logout">Logout</a>
+</div>
+</li>
+</ul>
+<div class="dropdown mobile-user-menu float-end">
+<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+<div class="dropdown-menu dropdown-menu-end">
+<a class="dropdown-item" href="/student/profile">My Profile</a>
+<a class="dropdown-item" href="/student/edit-profile">Edit Profile</a>
+
+<a class="dropdown-item" href="/student/logout">Logout</a>
+</div>
+</div>
+</div>
+<div class="sidebar" id="sidebar">
+<div class="sidebar-inner slimscroll">
+<div id="sidebar-menu" class="sidebar-menu">
+ <ul>
+<li class="menu-title">Main</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-01.svg')}}" alt=""></span> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/dashboard">Student Dashboard</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-04.svg')}}" alt=""></span> <span> Appointments </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/add-appointment">Make Appointment</a></li>
+<li><a href="/student/appointments">Active Appointment</a></li>
+<li><a href="/student/calendar">Calendar</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><i class="fa fa-edit"></i> <span> Record</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/medical-history">Medical Records</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-12.svg')}}" alt=""></span> <span> Messages</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/compose">Compose Message</a></li>
+</ul>
+</li>
+
+ </ul>
+<div class="logout-btn">
+<a href="/student/logout"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/logout.svg')}}" alt=""></span> <span>Logout</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="page-wrapper">
+<div class="content">
+
+<div class="page-header">
+<div class="row">
+<div class="col-sm-12">
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="/student/dashboard">Dashboard </a></li>
+<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+<li class="breadcrumb-item active">Edit Profile</li>
+</ul>
+</div>
+</div>
+</div>
+
+<form method="post" action="/student/edit-profile/execute/{{ admin.id }}">
+<div class="card-box">
+<h3 class="card-title">Basic Informations</h3>
+<div class="row">
+<div class="col-md-12">
+<div class="profile-img-wrap">
+<img class="inline-block" src="{{ url_for('static', filename='assets/img/user.jpg')}}" alt="user">
+<div class="fileupload btn">
+<span class="btn-text">edit</span>
+<input class="upload" type="file">
+</div>
+</div>
+<div class="profile-basic">
+<div class="row">
+<div class="col-md-4">
+<div class="form-group local-forms">
+<label class="focus-label">First Name</label>
+<input type="text" class="form-control floating" value="{{ admin['First_name'] }}" name="firstname">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group local-forms">
+<label class="focus-label">Middle Name</label>
+<input type="text" class="form-control floating" value="{{ admin['Middle_name'] }}" name="middlename">
+</div>
+</div>
+<div class="col-md-4">
+<div class="form-group local-forms">
+<label class="focus-label">Last Name</label>
+<input type="text" class="form-control floating" value="{{ admin['Last_name'] }}" name="lastname">
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group local-forms ">
+<label class="focus-label">Birth Date</label>
+<div class="cal-icon">
+<input class="form-control floating datetimepicker" type="text" value="{{ admin['Birthdate'] }}" name="birthdate">
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="form-group local-forms">
+<label class="focus-label">Gender</label>
+<select class="form-control select" name="gender">
+<option>{{ admin['Gender'] }}</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="card-box">
+<h3 class="card-title">other Informations</h3>
+<div class="row">
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Course<span class="login-danger">*</span></label>
+<select class="form-control select" name="course">
+ <option>{{ admin['Course'] }}</option>
+<option>Bachelor of Science in Information Technology</option>
+<option>Bachelor of Science in Office Adminitration</option>
+<option>Bachelor of Science in Nutrition and Dietritian</option>
+<option>Bachelor of Science in Agricultural Engineering</option>
+<option>Bachelor of Science in Agriculture</option>
+<option>Bachelor of Science in Hospitality Manangement</option>
+<option>Bachelor of Science in Tourism</option>
+<option>Bachelor of Science in Criminology</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Year Level<span class="login-danger">*</span></label>
+<select class="form-control select" name="yearlevel">
+ <option>{{ admin['Year_level'] }}</option>
+<option>1st Year</option>
+<option>2nd Year</option>
+<option>3rd Year</option>
+<option>4th Year</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label>Home Address <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="homeaddress" value="{{ admin['Home_Address'] }}">
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Civil Status <span class="login-danger">*</span></label>
+<select class="form-control select" name="civilstatus" >
+ <option>{{ admin['Civil_status'] }}</option>
+<option>Single</option>
+<option>Married</option>
+<option>Widow</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label>Place of Birth <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="placeofbirth" value="{{ admin['Place_of_birth'] }}" >
+</div>
+<div class="form-group">
+<label>Mobile Number <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="mobile" value="{{ admin['Cp_number'] }}">
+</div>
+<div class="form-group">
+<label>Boarding House Address <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="boardinghouse" value="{{ admin['Boarding_address'] }}">
+</div>
+<div class="form-group">
+<label>Nationality <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="nationality" value="{{ admin['Nationality'] }}">
+</div>
+<div class="form-group">
+<label>Religion <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="religion" value="{{ admin['Religion'] }}">
+</div>
+<div class="form-group">
+<label>Email <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="email" value="{{ admin['Email'] }}">
+</div>
+</div>
+</div>
+
+<div class="text-center m-t-20">
+<button class="btn btn-primary submit-btn" type="submit">Save</button>
+</div>
+</form>
+</div>
+
+</div>
+</div>
+<div class="sidebar-overlay" data-reff=""></div>
+<script src="{{ url_for('static', filename='assets/js/jquery-3.6.1.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.slimscroll.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/select2.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/moment.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/app.js')}}"></script>
+</body>
+
+</html>

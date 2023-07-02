@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.png')}}">
+<title>E-Health</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/select2.min.css')}}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-datetimepicker.min.css')}}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/feather/feather.css')}}">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/style.css')}}">
+</head>
+<body>
+<div class="main-wrapper">
+<div class="header">
+<div class="header-left">
+<a href="" class="logo">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span style="font-weight:bold;">E-Health</span>
+</a>
+</div>
+<a id="toggle_btn" href="javascript:void(0);"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<div class="top-nav-search mob-view">
+</div>
+<ul class="nav user-menu float-end">
+<li class="nav-item dropdown d-none d-sm-block">
+<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img src="{{ url_for('static', filename='assets/img/icons/note-icon-01.svg')}}" alt=""><span class="pulse"></span> </a>
+<div class="dropdown-menu notifications">
+<div class="topnav-dropdown-header">
+<span>Notifications</span>
+</div>
+<div class="drop-scroll">
+<ul class="notification-list">
+{% for User in Notification %}
+
+  {% if User.status1 == 6 %}<button class="custom-badge status-green ">
+                              <li class="notification-message">
+                              <a href="/student/medical-history">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> Your Appointment Has Been Rendered <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+
+    {% if User.status1 == 7 %}<button class="custom-badge status-orange ">
+                              <li class="notification-message">
+                              <a href="">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You Appointment is DUE<span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+    {% if User.status1 == 5 %}<button class="custom-badge">
+                              <li class="notification-message">
+                              <a href="/student/appointments">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You have Set a New Appointment <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li></button>
+                            {% else %}
+        {% endif %}
+     {% if User.status1 == 8 %}<button class="custom-badge status-pink ">
+                              <li class="notification-message">
+                              <a href="/student/medical-history">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You Canceled Your Appointment <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+
+
+{% endfor %}
+</ul>
+</div>
+<div class="topnav-dropdown-footer">
+<a href="">View all Notifications</a>
+</div>
+</div>
+</li>
+<li class="nav-item dropdown has-arrow user-profile-list">
+<a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+<div class="user-names">
+<h5>{{ admin['First_name'] }} {{ admin['Middle_name'] }} {{ admin['Last_name'] }}  </h5>
+<span>Student</span>
+</div>
+<span class="user-img">
+<img src="{{ url_for('static', filename='assets/img/user.jpg')}}" alt="Admin">
+</span>
+</a>
+<div class="dropdown-menu">
+<a class="dropdown-item" href="/student/profile">My Profile</a>
+<a class="dropdown-item" href="/student/edit-profile">Edit Profile</a>
+<a class="dropdown-item" href="/student/logout">Logout</a>
+</div>
+</li>
+</ul>
+<div class="dropdown mobile-user-menu float-end">
+<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+<div class="dropdown-menu dropdown-menu-end">
+<a class="dropdown-item" href="/student/profile">My Profile</a>
+<a class="dropdown-item" href="/student/edit-profile">Edit Profile</a>
+<a class="dropdown-item" href="/student/logout">Logout</a>
+ </div>
+</div>
+</div>
+<div class="sidebar" id="sidebar">
+<div class="sidebar-inner slimscroll">
+<div id="sidebar-menu" class="sidebar-menu">
+<ul>
+<li class="menu-title">Main</li>
+<li class="submenu">
+<a href="/student/dashboard"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-01.svg')}}" alt=""></span> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/dashboard">Student Dashboard</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-04.svg')}}" alt=""></span> <span> Appointments </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a class="active" href="/student/add-appointment">Make Appointment</a></li>
+<li><a href="/student/appointments">Active Appointment</a></li>
+<li><a href="/student/calendar">Calendar</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><i class="fa fa-edit"></i> <span> Record</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/medical-history">Medical Records</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-12.svg')}}" alt=""></span> <span> Messages</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/student/compose">Compose Message</a></li>
+</ul>
+</li>
+
+</ul>
+<div class="logout-btn">
+<a href="/student/logout"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/logout.svg')}}" alt=""></span> <span>Logout</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="page-wrapper">
+<div class="content">
+
+<div class="page-header">
+<div class="row">
+<div class="col-sm-12">
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="/student/add-appointment">Appointment </a></li>
+<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+<li class="breadcrumb-item active">Book Appointment</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12">
+<div class="card">
+<div class="card-body">
+   {% if error2 %}
+    <p style="color:green;">{{ error2 }}</p>
+    {% endif %}
+   {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    	<script type="text/javascript">
+		function showForm() {
+			var selectedOption = document.getElementById("form-dropdown").value;
+			if (selectedOption == "form1") {
+				document.getElementById("form1").style.display = "block";
+				document.getElementById("form2").style.display = "none";
+				document.getElementById("form3").style.display = "none";
+			} else if (selectedOption == "form2") {
+				document.getElementById("form2").style.display = "block";
+				document.getElementById("form1").style.display = "none";
+				document.getElementById("form3").style.display = "none";
+			}
+			 else if (selectedOption == "form3") {
+				document.getElementById("form3").style.display = "block";
+				document.getElementById("form2").style.display = "none";
+				document.getElementById("form1").style.display = "none";
+			}else {
+				document.getElementById("form1").style.display = "none";
+				document.getElementById("form2").style.display = "none";
+				document.getElementById("form3").style.display = "none";
+			}
+		}
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+    <h4><label>Please Select a Service</label></h4>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<select id="form-dropdown" class="form-control select" onchange="showForm()">
+		<option value=""></option>
+		<option value="form1">Dental Services</option>
+		<option value="form2">Medical Services</option>
+        <option value="form3">Suplementary and Other Services</option>
+	</select>
+</div>
+</div>
+
+<div>
+
+</div>
+
+
+    <form id="form1" style="display: none;" method="post" action="/student/add-appointment-execute_dental">
+
+
+
+
+
+
+<div class="row">
+<div class="col-12">
+<div class="form-heading">
+</div>
+</div>
+<div class="Payslip-head">
+<div class="payrolss-counts">
+<h5>Patient Details</h5>
+<ul class="nav">
+<li><a href="javascript:;" class=" me-2"><img src="assets/img/icons/pdf-icon-01.svg" alt=""></a></li>
+<li><a href="javascript:;" class=" me-2"><img src="assets/img/icons/pdf-icon-02.svg" alt=""></a></li>
+</ul>
+</div>
+</div>
+<div class="payroll-head-clinic">
+<div class="row">
+<div class="col-12 col-sm-12">
+<div class="invoice-counts">
+</div>
+</div>
+</div>
+</div>
+<div class="row custom-invoice">
+<div class="col-12 col-md-6 m-b-20">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span>E-Health Services</span>
+<ul class="list-unstyled invoice-clinic mt-2">
+<li>Purok 3, Andress Bonifacio,
+<li>Diffun, Quirino, Philippines</li>
+<li>Pc:3401</li>
+</ul>
+</div>
+<div class="col-12 col-md-6 m-b-20">
+<div class="invoice-details">
+<h3>Name: {{ admin['First_name'] }} {{ admin['Last_name'] }}</h3>
+<h3>Student</h3>
+<ul class="list-unstyled invoice-clinic">
+<li>Student ID: {{ admin['idnumber'] }}</li>
+<li>Mobile: {{ admin['Cp_number'] }}</li>
+<li><a href="https://preclinic.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6c6f7c7c776d7b6a6f4e6b766f637e626b206d6163">{{ admin['Email'] }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['idnumber'] }}" name="idnumber">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['Course'] }}" name="course">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['Year_level'] }}" name="yearlevel">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden" value="{{ admin['Email'] }}" name="email">
+</div>
+</div>
+<div class="col-1 col-md-1">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['First_name'] }}" name="firstname">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Middle_name'] }}" name="middlename">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Last_name'] }}" name="lastname">
+</div>
+</div>
+<div class="col-1 col-md-1">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Gender'] }}" name="gender">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Cp_number'] }}" name="mobile">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden" value="{{ admin['Home_Address'] }}" name="address">
+</div>
+</div>
+<div class="col-12">
+<div class="form-heading">
+<h4>Appointment Details</h4>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Date of Appointment <span class="login-danger">*</span></label>
+<input type="text" id="datepicker1" name="dateappointment" class="form-control select" required>
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		// Get disabled dates from Flask template variable
+		var disabledDates = {{ disabled_dates1 | tojson }};
+
+		// Disable weekends and holidays
+		function disableDates(date) {
+			var day = date.getDay();
+			var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
+
+			// Disable weekends (Saturday = 6, Sunday = 0)
+			if (day === 6 || day === 0) {
+				return [false];
+			}
+
+			// Disable dates from database
+			if (disabledDates.indexOf(formattedDate) !== -1) {
+				return [false];
+			}
+
+			return [true];
+		}
+
+		// Initialize date picker
+		$("#datepicker1").datepicker({
+			minDate: 0,
+			beforeShowDay: disableDates
+		});
+	});
+	</script>
+
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Time</label>
+<select class="form-control select" name="time" required>
+ <option>1:00pm - 2:00pm</option>
+  <option>2:00pm - 3:00pm</option>
+   <option>4:00pm - 5:00pm</option>
+</select>
+</div>
+</div>
+
+
+
+
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Treatment</label>
+<select class="form-control select" name="treatment" required>
+<option>Mouth Examination</option>
+<option>Tooth Extraction</option>
+<option>Oral Prophylaxis</option>
+<option>Restoration of Tooth</option>
+</select>
+</div>
+</div>
+<div class="col-12">
+<div class="doctor-submit text-end">
+<a href="/student/add-appointment" type="submit" class="btn btn-warning submit-form me-2">Go Back..</a>
+<button type="submit" class="btn btn-primary submit-form me-2" >Submit</button>
+</div>
+</div>
+</div>
+
+
+
+
+
+  <script>
+    // Function to show the dialog
+    function showDialog() {
+      var dialogContainer = document.getElementById("dialog-container");
+      dialogContainer.style.display = "block";
+    }
+
+    // Function to close the dialog
+    function closeDialog() {
+      var dialogContainer = document.getElementById("dialog-container");
+      dialogContainer.style.display = "none";
+    }
+
+    // Show the dialog on page load if message is present
+    window.onload = function() {
+      var message = "{{ message }}";
+      if (message.trim() !== "") {
+        showDialog();
+      }
+    };
+  </script>
+
+
+
+	</form>
+
+
+
+	<form id="form2" style="display: none;" method="post" action="/student/add-appointment-execute_nurse">
+
+
+
+
+<div class="row">
+<div class="col-12">
+<div class="form-heading">
+</div>
+</div>
+<div class="Payslip-head">
+<div class="payrolss-counts">
+<h5>Patient Details</h5>
+   {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+<ul class="nav">
+</ul>
+</div>
+</div>
+<div class="payroll-head-clinic">
+<div class="row">
+<div class="col-12 col-sm-12">
+<div class="invoice-counts">
+</div>
+</div>
+</div>
+</div>
+<div class="row custom-invoice">
+<div class="col-12 col-md-6 m-b-20">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span>E-Health Services</span>
+<ul class="list-unstyled invoice-clinic mt-2">
+<li>Purok 3, Andress Bonifacio,
+<li>Diffun, Quirino, Philippines</li>
+<li>Pc:3401</li>
+</ul>
+</div>
+<div class="col-12 col-md-6 m-b-20">
+<div class="invoice-details">
+<h3>Name: {{ admin['First_name'] }} {{ admin['Last_name'] }}</h3>
+<h3>Student</h3>
+<ul class="list-unstyled invoice-clinic">
+<li>Student ID: {{ admin['idnumber'] }}</li>
+<li>Mobile: {{ admin['Cp_number'] }}</li>
+<li><a href="https://preclinic.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6c6f7c7c776d7b6a6f4e6b766f637e626b206d6163">{{ admin['Email'] }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['idnumber'] }}" name="idnumber">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['Course'] }}" name="course">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['Year_level'] }}" name="yearlevel">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden" value="{{ admin['Email'] }}" name="email">
+</div>
+</div>
+<div class="col-1 col-md-1">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['First_name'] }}" name="firstname">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Middle_name'] }}" name="middlename">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Last_name'] }}" name="lastname">
+</div>
+</div>
+<div class="col-1 col-md-1">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Gender'] }}" name="gender">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Cp_number'] }}" name="mobile">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden" value="{{ admin['Home_Address'] }}" name="address">
+</div>
+</div>
+<div class="col-12">
+<div class="form-heading">
+<h4>Appointment Details</h4>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Date of Appointment <span class="login-danger">*</span></label>
+<input type="text" id="datepicker" name="dateappointment" class="form-control select" required>
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		// Get disabled dates from Flask template variable
+		var disabledDates = {{ disabled_dates | tojson }};
+
+		// Disable weekends and holidays
+		function disableDates(date) {
+			var day = date.getDay();
+			var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
+
+			// Disable weekends (Saturday = 6, Sunday = 0)
+			if (day === 6 || day === 0) {
+				return [false];
+			}
+
+			// Disable dates from database
+			if (disabledDates.indexOf(formattedDate) !== -1) {
+				return [false];
+			}
+
+			return [true];
+		}
+
+		// Initialize date picker
+		$("#datepicker").datepicker({
+			minDate: 0,
+			beforeShowDay: disableDates
+		});
+	});
+	</script>
+
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Time</label>
+<select class="form-control select" name="time" required>
+ <option>8:30am - 9:00am</option>
+ <option>9:00am - 9:30am</option>
+ <option>9:30am - 10:00am</option>
+  <option>10:00am - 10:30am</option>
+     <option>10:30am - 11:00am</option>
+ <option>1:00pm - 1:30pm</option>
+  <option>1:30pm - 2:00pm</option>
+   <option>2:00pm - 2:30pm</option>
+   <option>2:30pm - 3:00pm</option>
+   <option>3:30pm - 4:00pm</option>
+   <option>4:00pm - 4:30pm</option>
+</select>
+</div>
+</div>
+
+
+
+
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Treatment</label>
+<select class="form-control select" name="treatment" required>
+<option>Vital Signs Checking</option>
+<option>Inspection(Physical)</option>
+<option>Capillary Blood Glucose Test</option>
+<option>Pregnancy Test</option>
+<option>Consultation and Treatment</option>
+</select>
+</div>
+</div>
+<div class="col-12">
+<div class="doctor-submit text-end">
+<a href="/student/add-appointment" type="submit" class="btn btn-warning submit-form me-2">Go Back..</a>
+<button type="submit" class="btn btn-primary submit-form me-2">Submit</button>
+</div>
+</div>
+</div>
+
+
+
+
+
+	</form>
+
+
+
+
+	<form id="form3" style="display: none;" method="post" action="/student/add-appointment-execute-supplementary">
+
+<div class="row">
+<div class="col-12">
+<div class="form-heading">
+</div>
+</div>
+<div class="Payslip-head">
+<div class="payrolss-counts">
+<h5>Patient Details</h5>
+   {% if error %}
+    <p>{{ error }}</p>
+    {% endif %}
+<ul class="nav">
+</ul>
+</div>
+</div>
+<div class="payroll-head-clinic">
+<div class="row">
+<div class="col-12 col-sm-12">
+<div class="invoice-counts">
+
+</div>
+</div>
+</div>
+</div>
+<div class="row custom-invoice">
+<div class="col-12 col-md-6 m-b-20">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span>E-Health Services</span>
+<ul class="list-unstyled invoice-clinic mt-2">
+<li>Purok 3, Andress Bonifacio,
+<li>Diffun, Quirino, Philippines</li>
+<li>Pc:3401</li>
+</ul>
+</div>
+<div class="col-12 col-md-6 m-b-20">
+<div class="invoice-details">
+<h3>Name: {{ admin['First_name'] }} {{ admin['Last_name'] }}</h3>
+<h3>Student</h3>
+<ul class="list-unstyled invoice-clinic">
+<li>Student ID: {{ admin['idnumber'] }}</li>
+<li>Mobile: {{ admin['Cp_number'] }}</li>
+<li><a href="https://preclinic.dreamguystech.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6c6f7c7c776d7b6a6f4e6b766f637e626b206d6163">{{ admin['Email'] }}</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['idnumber'] }}" name="idnumber">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['Course'] }}" name="course">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden"  value="{{ admin['Year_level'] }}" name="yearlevel">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden" value="{{ admin['Email'] }}" name="email">
+</div>
+</div>
+<div class="col-1 col-md-1">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['First_name'] }}" name="firstname">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Middle_name'] }}" name="middlename">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Last_name'] }}" name="lastname">
+</div>
+</div>
+<div class="col-1 col-md-1">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Gender'] }}" name="gender">
+</div>
+</div>
+<div class="col-1 col-md-1 ">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" value="{{ admin['Cp_number'] }}" name="mobile">
+</div>
+</div>
+<div class="col-1 col-sm-1">
+<div class="form-group local-forms">
+ <input class="form-control" type="hidden" value="{{ admin['Home_Address'] }}" name="address">
+</div>
+</div>
+<div class="col-12">
+<div class="form-heading">
+<h4>Appointment Details</h4>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Date of Appointment <span class="login-danger">*</span></label>
+<input type="text" id="datepicker2" name="dateappointment" class="form-control select" required>
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		// Get disabled dates from Flask template variable
+		var disabledDates = {{ disabled_dates2 | tojson }};
+
+		// Disable weekends and holidays
+		function disableDates(date) {
+			var day = date.getDay();
+			var formattedDate = $.datepicker.formatDate("yy-mm-dd", date);
+
+			// Disable weekends (Saturday = 6, Sunday = 0)
+			if (day === 6 || day === 0) {
+				return [false];
+			}
+
+			// Disable dates from database
+			if (disabledDates.indexOf(formattedDate) !== -1) {
+				return [false];
+			}
+
+			return [true];
+		}
+
+		// Initialize date picker
+		$("#datepicker2").datepicker({
+			minDate: 0,
+			beforeShowDay: disableDates
+		});
+	});
+	</script>
+
+</div>
+</div>
+
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Time</label>
+<select class="form-control select" name="time" required>
+ <option>8:30am - 9:00am</option>
+ <option>9:00am - 9:30am</option>
+ <option>9:30am - 10:00am</option>
+  <option>10:00am - 10:30am</option>
+     <option>10:30am - 11:00am</option>
+ <option>1:00pm - 1:30pm</option>
+  <option>1:30pm - 2:00pm</option>
+   <option>2:00pm - 2:30pm</option>
+   <option>2:30pm - 3:00pm</option>
+   <option>3:30pm - 4:00pm</option>
+   <option>4:00pm - 4:30pm</option>
+</select>
+</div>
+</div>
+
+
+
+
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Select Treatment</label>
+<select class="form-control select" name="treatment" required>
+<option>Issuance of Certificate & Other Documents</option>
+<option>Administration Dispensing of Medicine</option>
+</select>
+</div>
+</div>
+<div class="col-12">
+<div class="doctor-submit text-end">
+<a href="/student/add-appointment" type="submit" class="btn btn-warning submit-form me-2">Go Back..</a>
+<button type="submit" class="btn btn-primary submit-form me-2">Submit</button>
+</div>
+</div>
+</div>
+
+
+
+
+
+	</form>
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="delete_patient" class="modal fade delete-modal" role="dialog">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-body text-center">
+<img src="{{ url_for('static', filename='assets/img/sent.png')}}" alt="" width="50" height="46">
+<h3>Are you sure want to delete this ?</h3>
+<div class="m-t-20"> <a href="#" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+<button type="submit" class="btn btn-danger">Delete</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar-overlay" data-reff=""></div>
+
+<script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/feather.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.slimscroll.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/select2.min.js')}}"></script>
+
+<script src="{{ url_for('static', filename='assets/plugins/moment/moment.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/app.js')}}"></script>
+</body>
+
+</html>

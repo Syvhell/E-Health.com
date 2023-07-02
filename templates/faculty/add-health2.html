@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.png')}}">
+<title>E-Health</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.cssg')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap-datetimepicker.min.css')}}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/feather/feather.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/style.css')}}">
+</head>
+<body>
+<div class="main-wrapper">
+<div class="header">
+<div class="header-left">
+<a href="" class="logo">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span style="font-weight:bold;">E-Health</span>
+</a>
+</div>
+<a id="toggle_btn" href="javascript:void(0);"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<div class="top-nav-search mob-view">
+</div>
+<ul class="nav user-menu float-end">
+<li class="nav-item dropdown d-none d-sm-block">
+<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img src="{{ url_for('static', filename='assets/img/icons/note-icon-01.svg')}}" alt=""><span class="pulse"></span> </a>
+<div class="dropdown-menu notifications">
+<div class="topnav-dropdown-header">
+<span>Notifications</span>
+</div>
+<div class="drop-scroll">
+<ul class="notification-list">
+<li class="notification-message">
+<a href="activities.html">
+<div class="media">
+<span class="avatar">
+<img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+</span>
+<div class="media-body">
+<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+</div>
+</div>
+</a>
+</li>
+<li class="notification-message">
+<a href="activities.html">
+<div class="media">
+<span class="avatar">V</span>
+<div class="media-body">
+<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+</div>
+</div>
+</a>
+</li>
+<li class="notification-message">
+<a href="activities.html">
+<div class="media">
+<span class="avatar">L</span>
+<div class="media-body">
+<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+</div>
+</div>
+</a>
+</li>
+<li class="notification-message">
+<a href="activities.html">
+<div class="media">
+<span class="avatar">G</span>
+<div class="media-body">
+<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+</div>
+</div>
+</a>
+</li>
+<li class="notification-message">
+<a href="activities.html">
+<div class="media">
+<span class="avatar">V</span>
+<div class="media-body">
+<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
+<p class="noti-time"><span class="notification-time">2 days ago</span></p>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div class="topnav-dropdown-footer">
+<a href="activities.html">View all Notifications</a>
+</div>
+</div>
+</li>
+<li class="nav-item dropdown has-arrow user-profile-list">
+<a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+<div class="user-names">
+<h5>{{ admin['First_name'] }} {{ admin['Middle_name'] }} {{ admin['Last_name'] }}  </h5>
+<span>Faculty</span>
+</div>
+<span class="user-img">
+<img src="{{ url_for('static', filename='assets/img/user.jpg')}}" alt="Admin">
+</span>
+</a>
+<div class="dropdown-menu">
+<a class="dropdown-item" href="/faculty/profile">My Profile</a>
+<a class="dropdown-item" href="/faculty/edit-profile">Edit Profile</a>
+<a class="dropdown-item" href="/faculty/logout">Logout</a>
+</div>
+</li>
+</ul>
+<div class="dropdown mobile-user-menu float-end">
+<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+<div class="dropdown-menu dropdown-menu-end">
+<a class="dropdown-item" href="/faculty/profile">My Profile</a>
+<a class="dropdown-item" href="/faculty/edit-profile">Edit Profile</a>
+<a class="dropdown-item" href="/faculty/logout">Logout</a>
+</div>
+</div>
+</div>
+<div class="sidebar" id="sidebar">
+<div class="sidebar-inner slimscroll">
+<div id="sidebar-menu" class="sidebar-menu">
+<ul>
+<li class="menu-title">Main</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-01.svg')}}" alt=""></span> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/dashboard">Faculty Dashboard</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-04.svg')}}" alt=""></span> <span> Appointments </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/add-appointment">Make Appointment</a></li>
+<li><a href="/faculty/appointments">Active Appointment</a></li>
+<li><a href="/faculty/calendar">Calendar</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><i class="fa fa-edit"></i> <span> Record</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/medical-history">Medical Records</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-12.svg')}}" alt=""></span> <span> Messages</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/compose">Compose Message</a></li>
+</ul>
+</li>
+
+</ul>
+<div class="logout-btn">
+<a href="/faculty/logout"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/logout.svg')}}" alt=""></span> <span>Logout</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="page-wrapper">
+<div class="content">
+
+<div class="page-header">
+<div class="row">
+<div class="col-sm-12">
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="/faculty/dashboard">Dashboard </a></li>
+<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+<li class="breadcrumb-item active">Edit Family Background</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="card-box">
+<h3 class="card-title">Health History Informations</h3>
+<div class="row">
+
+
+<form action="/faculty/add-healthinformation2/execute" method="post">
+<div class="card-box">
+<h3 class="card-title">Health History Informations</h3>
+<div class="row">
+
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Head_Injury <span class="login-danger">*</span></label>
+<select class="form-control select" name="Head_Injury" >
+ <option>{{ health['Head_Injury'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Head_Injury_Age" value="{{ health['Head_Injury_Age'] }}">
+</div>
+</div>
+
+
+ <div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Do You Have Hepatitis <span class="login-danger">*</span></label>
+<select class="form-control select" name="Surgery" >
+ <option>{{ health['Surgery'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Surgery Type? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Surgery_Type" value="{{ health['Surgery_Type']}}">
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Surgery_Age" value="{{ health['Surgery_Age']}}">
+</div>
+</div>
+
+
+ <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have 	Allergies <span class="login-danger">*</span></label>
+<select class="form-control select" name="Allergies" >
+ <option>{{ health['Allergies'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Allergies_Age" value="{{ health['Allergies_Age']}}">
+</div>
+</div>
+
+ <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have High_Blood_Pressure <span class="login-danger">*</span></label>
+<select class="form-control select" name="High_Blood_Pressure" >
+ <option>{{ health['High_Blood_Pressure'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="High_Blood_Pressure_Age" value="{{ health['High_Blood_Pressure_Age']}}">
+</div>
+</div>
+
+ <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Hypothyroidism <span class="login-danger">*</span></label>
+<select class="form-control select" name="Hypothyroidism" >
+ <option>{{ health['Hypothyroidism'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Hypothyroidism_Age" value="{{ health['Hypothyroidism_Age']}}">
+</div>
+</div>
+
+
+  <div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Do You Have 	Cancer <span class="login-danger">*</span></label>
+<select class="form-control select" name="Cancer" >
+ <option>{{ health['Cancer'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>Cancer Type? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Cancer_Type" value="{{ health['Cancer_Type']}}">
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-4">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Cancer_Age" value="{{ health['Cancer_Age']}}">
+</div>
+</div>
+
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Psoriasis <span class="login-danger">*</span></label>
+<select class="form-control select" name="Psoriasis" >
+ <option>{{ health['Psoriasis'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Psoriasis_Age" value="{{ health['Psoriasis_Age']}}">
+</div>
+</div>
+
+
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Heart_Problem <span class="login-danger">*</span></label>
+<select class="form-control select" name="Heart_Problem" >
+ <option>{{ health['Heart_Problem'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Heart_Problem_Age" value="{{ health['Heart_Problem_Age']}}">
+</div>
+</div>
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Pneumonia <span class="login-danger">*</span></label>
+<select class="form-control select" name="Pneumonia" >
+ <option>{{ health['Pneumonia'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Pneumonia_Age" value="{{ health['Pneumonia_Age']}}">
+</div>
+</div>
+
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Epilepsy<span class="login-danger">*</span></label>
+<select class="form-control select" name="Epilepsy" >
+ <option>{{ health['Epilepsy'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Epilepsy_Age" value="{{ health['Epilepsy_Age']}}">
+</div>
+</div>
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Kidney_Stone <span class="login-danger">*</span></label>
+<select class="form-control select" name="Kidney_Stone" >
+ <option>{{ health['Kidney_Stone'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Kidney_Stone_Age" value="{{ health['Kidney_Stone_Age']}}">
+</div>
+</div>
+
+
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have Jaundice <span class="login-danger">*</span></label>
+<select class="form-control select" name="Jaundice" >
+ <option>{{ health['Jaundice'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Jaundice_Age" value="{{ health['Jaundice_Age']}}">
+</div>
+</div>
+
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have 	Tuberculosis <span class="login-danger">*</span></label>
+<select class="form-control select" name="	Tuberculosis" >
+ <option>{{ health['Tuberculosis'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Tuberculosis_Age" value="{{ health['Tuberculosis_Age']}}">
+</div>
+</div>
+
+  <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have 	Fainting_Spell<span class="login-danger">*</span></label>
+<select class="form-control select" name="Fainting_Spell" >
+ <option>{{ health['Fainting_Spell'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Fainting_Spell_Age" value="{{ health['Fainting_Spell_Age']}}">
+</div>
+</div>
+
+
+    <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have 	Seizures<span class="login-danger">*</span></label>
+<select class="form-control select" name="Seizures" >
+ <option>{{ health['Seizures'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Seizures_Age" value="{{ health['Seizures_Age']}}">
+</div>
+</div>
+
+
+
+    <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>Do You Have 	Allergies_Seasonal<span class="login-danger">*</span></label>
+<select class="form-control select" name="Allergies_Seasonal" >
+ <option>{{ health['Allergies_Seasonal'] }}</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+</div>
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<label>What Age? <span class="login-danger">*</span></label>
+<input class="form-control" type="text" name="Allergies_Seasonal_Age" value="{{ health['Allergies_Seasonal_Age']}}">
+</div>
+</div>
+
+
+
+<div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" name="ID_Number" value="{{ admin['idnumber']}}">
+</div>
+</div>
+
+ <div class="col-12 col-md-6 col-xl-6">
+<div class="form-group local-forms">
+<input class="form-control" type="hidden" name="status" value="{{ admin['status']}}">
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+<div class="text-center m-t-20">
+<button class="btn btn-primary submit-btn" type="submit">Save</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
+</div>
+</div>
+<div class="sidebar-overlay" data-reff=""></div>
+<script src="{{ url_for('static', filename='assets/js/jquery-3.6.1.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.slimscroll.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/select2.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/moment.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/app.js')}}"></script>
+</body>
+
+</html>

@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+<title>E-Health</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/fontawesome/css/all.min.css')}}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/plugins/feather/feather.css')}}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/style.css')}}">
+</head>
+<body>
+<div class="main-wrapper">
+<div class="header">
+<div class="header-left">
+<a href="" class="logo">
+<img src="{{ url_for('static', filename='assets/img/logo.png')}}" width="35" height="35" alt=""> <span style="font-weight:bold;">E-Health</span>
+</a>
+</div>
+<a id="toggle_btn" href="javascript:void(0);"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<a id="mobile_btn" class="mobile_btn float-start" href="#sidebar"><img src="{{ url_for('static', filename='assets/img/icons/bar-icon.svg')}}" alt=""></a>
+<div class="top-nav-search mob-view">
+</div>
+<ul class="nav user-menu float-end">
+<li class="nav-item dropdown d-none d-sm-block">
+<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown"><img src="{{ url_for('static', filename='assets/img/icons/note-icon-01.svg')}}" alt=""><span class="pulse"></span> </a>
+<div class="dropdown-menu notifications">
+<div class="topnav-dropdown-header">
+<span>Notifications</span>
+</div>
+<div class="drop-scroll">
+<ul class="notification-list">
+{% for User in Notification %}
+
+  {% if User.status1 == 6 %}<button class="custom-badge status-green ">
+                              <li class="notification-message">
+                              <a href="/faculty/medical-history">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> Your Appointment Has Been Rendered <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+
+    {% if User.status1 == 7 %}<button class="custom-badge status-orange ">
+                              <li class="notification-message">
+                              <a href="">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You Appointment is DUE<span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+    {% if User.status1 == 5 %}<button class="custom-badge">
+                              <li class="notification-message">
+                              <a href="/faculty/appointments">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You have Set a New Appointment <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">On: {{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li></button>
+                            {% else %}
+        {% endif %}
+     {% if User.status1 == 8 %}<button class="custom-badge status-pink ">
+                              <li class="notification-message">
+                              <a href="/faculty/medical-history">
+                               <div class="media">
+                              <span class="avatar">
+                              <img alt="John Doe" src="{{ url_for('static', filename='assets/img/user.jpg')}}" class="img-fluid">
+                               </span>
+                             <div class="media-body">
+                             <p class="noti-details"><span class="noti-title">{{User.firstname}} {{User.lastname}}</span> You Canceled Your Appointment <span class="noti-title">{{User.Title}}</span></p>
+                             <p class="noti-time"><span class="notification-time">{{User.Start_date_time}}</span></p>
+                             </div>
+                             </div>
+                             </a>
+                             </li>
+                            </button>{% else %}
+        {% endif %}
+
+
+{% endfor %}
+</ul>
+</div>
+<div class="topnav-dropdown-footer">
+<a href="">View all Notifications</a>
+</div>
+</div>
+</li>
+<li class="nav-item dropdown has-arrow user-profile-list">
+<a href="#" class="dropdown-toggle nav-link user-link" data-bs-toggle="dropdown">
+<div class="user-names">
+<h5>{{ admin['First_name'] }} {{ admin['Middle_name'] }} {{ admin['Last_name'] }}  </h5>
+<span>Faculty</span>
+</div>
+<span class="user-img">
+<img src="{{ url_for('static', filename='assets/img/user.jpg')}}" alt="Admin">
+</span>
+</a>
+<div class="dropdown-menu">
+<a class="dropdown-item" href="/faculty/profile">My Profile</a>
+<a class="dropdown-item" href="/faculty/edit-profile">Edit Profile</a>
+
+<a class="dropdown-item" href="/faculty/logout">Logout</a>
+</div>
+</li>
+</ul>
+<div class="dropdown mobile-user-menu float-end">
+<a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+<div class="dropdown-menu dropdown-menu-end">
+<a class="dropdown-item" href="/faculty/profile">My Profile</a>
+<a class="dropdown-item" href="/faculty/edit-profile">Edit Profile</a>
+
+<a class="dropdown-item" href="/faculty/logout">Logout</a>
+</div>
+</div>
+</div>
+<div class="sidebar" id="sidebar">
+<div class="sidebar-inner slimscroll">
+<div id="sidebar-menu" class="sidebar-menu">
+<ul>
+<li class="menu-title">Main</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-01.svg')}}" alt=""></span> <span> Dashboard </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/dashboard">Faculty Dashboard</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-04.svg')}}" alt=""></span> <span> Appointments </span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/add-appointment">Make Appointment</a></li>
+<li><a href="/faculty/appointments">Active Appointment</a></li>
+<li><a href="/faculty/calendar">Calendar</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><i class="fa fa-edit"></i> <span> Record</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/medical-history">Medical Records</a></li>
+</ul>
+</li>
+<li class="submenu">
+<a href="#"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/menu-icon-12.svg')}}" alt=""></span> <span> Messages</span> <span class="menu-arrow"></span></a>
+<ul style="display: none;">
+<li><a href="/faculty/compose">Compose Message</a></li>
+</ul>
+</li>
+
+</ul>
+<div class="logout-btn">
+<a href="/faculty/logout"><span class="menu-side"><img src="{{ url_for('static', filename='assets/img/icons/logout.svg')}}" alt=""></span> <span>Logout</span></a>
+</div>
+</div>
+</div>
+</div>
+<div class="page-wrapper">
+<div class="content">
+<div class="row">
+<div class="col-sm-7 col-6">
+<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href"/faculty/dashboard">Dashboard </a></li>
+<li class="breadcrumb-item"><i class="feather-chevron-right"></i></li>
+<li class="breadcrumb-item active">My Profile</li>
+</ul>
+</div>
+<div class="col-sm-5 col-6 text-end m-b-30">
+<a href="/faculty/edit-profile" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Personal Informations</a>
+</div>
+</div>
+<div class="card-box profile-header">
+<div class="row">
+<div class="col-md-12">
+<div class="profile-view">
+<div class="profile-img-wrap">
+<div class="profile-img">
+<a href="#"><img class="avatar" src="" alt="">{{ admin['Middle_name'] }}</img></a>
+</div>
+</div>
+<div class="profile-basic">
+<div class="row">
+<div class="col-md-5">
+<div class="profile-info-left">
+<h3 class="user-name m-t-0 mb-0">{{ admin['First_name'] }} {{ admin['Middle_name'] }} {{ admin['Last_name'] }}</h3>
+<small class="text-muted">{{ admin['position'] }}</small>
+<div class="staff-id">Faculty ID : {{ admin['idnumber'] }}</div>
+<div class="staff-msg">{% if studentapproval.status == 4 %}<button class="custom-badge status-green ">
+                              Approved
+                            </button>{% else %}<button class="custom-badge status-pink ">
+                              Not Approved
+                            </button>{% endif %}</div>
+</div>
+</div>
+<div class="col-md-7">
+<ul class="personal-info">
+<li>
+<span class="title">Phone:</span>
+<span class="text"><a href="#">{{ admin['Cp_number'] }}</a></span>
+</li>
+<li>
+<span class="title">Email:</span>
+<span class="text"><a href="#"><span class="__cf_email__" data-cfemail="83e0f1eaf0f7eaede2e4f1ecf5e6f0c3e6fbe2eef3efe6ade0ecee">{{ admin['Email'] }}</span></a></span>
+</li>
+<li>
+<span class="title">Birthday:</span>
+<span class="text">{{ admin['Birthdate'] }}</span>
+</li>
+<li>
+<span class="title">Address:</span>
+<span class="text">{{ admin['Home_Address'] }}</span>
+</li>
+<li>
+<span class="title">Gender:</span>
+ <span class="text">{{ admin['Gender'] }}</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="profile-tabs">
+<ul class="nav nav-tabs nav-tabs-bottom">
+<li class="nav-item"><a class="nav-link active" href="#about-cont" data-bs-toggle="tab">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#bottom-tab2" data-bs-toggle="tab">Health History</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane show active" id="about-cont">
+<div class="row">
+<div class="col-md-12">
+<div class="card-box">
+<h3 class="card-title">Position Informations</h3>
+<div class="experience-box">
+<ul class="experience-list">
+<li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ admin['position'] }}</a>
+<div></div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+ <div class="row">
+<div class="col-md-12">
+<div class="card-box">
+<h3 class="card-title">Family Background Information</h3>
+<div class="experience-box">
+<ul class="experience-list">
+<li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Gaurdian'] }}</a>
+<span class="time">Gaurdian</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Father_name'] }}</a>
+<span class="time">Father Name</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Father_age'] }}</a>
+<span class="time">Father Age</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Father_address'] }}</a>
+<span class="time">Father Address</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Father_occupation'] }}</a>
+<span class="time">Father Occupation</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Father_educational_attainment'] }}</a>
+<span class="time">Father Educational Attainment</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Mother_name'] }}</a>
+<span class="time">Mother Name</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Mother_age'] }}</a>
+<span class="time">Mother Age</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Mother_Address'] }}</a>
+<span class="time">Mother Address</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Mother_occupation'] }}</a>
+<span class="time">Mother Occupation</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ familybackgroundinfos['Mother_educational_attainment'] }}</a>
+<span class="time">Mother Educational Attainment</span>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-sm-5 col-6 text-end m-b-30">
+{% if studentapproval1.status == 4 %}<a href="/faculty/edit-profilefamily" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Lifestyle Background Informations</a>
+ {% else %}<a href="/faculty/add-profilefamily" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Lifestyle Background Informations</a>{% endif %}
+</div>
+
+</div>
+
+<div class="card-box ">
+<h3 class="card-title">Life Style Information</h3>
+<div class="experience-box">
+<ul class="experience-list">
+<li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ lifestyleinfos['Do_you_Smoke'] }}</a>
+<span class="time">Do you smoke?</span>
+</div>
+</div>
+</li>
+<li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ lifestyleinfos['How_many_stick'] }}</a>
+<span class="time">How many stick a day?</span>
+</div>
+</div>
+</li>
+<li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ lifestyleinfos['Do_someone'] }}</a>
+<span class="time">Do someone in your house smoke?</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ lifestyleinfos['Do_drink_Alchohol'] }}</a>
+<span class="time">Do you drink Alchohol?</span>
+</div>
+</div>
+</li>
+ <li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ lifestyleinfos['How_often'] }}</a>
+<span class="time">How often?</span>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-sm-5 col-6 text-end m-b-30">
+{% if studentapproval2.status == 4 %}<a href="/faculty/edit-lifestyle" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Lifestyle Background Informations</a>
+ {% else %}<a href="/faculty/add-lifestyle" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Lifestyle Background Informations</a>{% endif %}
+</div>
+
+</div>
+<div class="tab-pane" id="bottom-tab2">
+<div class="col-md-12">
+<div class="card-box">
+<h3 class="card-title">Health Background Information</h3>
+<div class="experience-box">
+<ul class="experience-list">
+<li>
+<div class="experience-user">
+<div class="before-circle"></div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Asthma'] }}</a>
+<span class="time">Do you have Asthma?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Asthma_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Hepatitis'] }}</a>
+<span class="time">Do you have Hepatitis?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Hepatitis_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['High_Cholesterol'] }}</a>
+<span class="time">Do you have High Cholesterol?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['High_Cholesterol_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Goiter'] }}</a>
+<span class="time">Do you have Goiter?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Goiter_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Leukemia'] }}</a>
+<span class="time">Do you have Leukemia?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Leukemia_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Angina'] }}</a>
+<span class="time">Do you have Angina?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Angina_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Heart_Murmur'] }}</a>
+<span class="time">Do you have High Heart Murmur?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Heart_Murmur_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Stroke'] }}</a>
+<span class="time">Do you have Stroke?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Stroke_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Kidney_Disease'] }}</a>
+<span class="time">Do you have Kidney Disease?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Kidney_Disease_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Anemia'] }}</a>
+<span class="time">Do you have Anemia?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Anemia_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Stomach_or_Peptic_Ulcer'] }}</a>
+<span class="time">Do you have Stomach or Peptic Ulcer?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation1['Stomach_or_Peptic_Ulcer_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+
+<div class="col-sm-5 col-6 text-end m-b-30">
+{% if studentapproval3.status == 4 %}<a href="/faculty/edit-healthinformation1" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Lifestyle Background Informations</a>
+ {% else %}<a href="/faculty/add-healthinformation1" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Lifestyle Background Informations</a>{% endif %}
+</div>
+
+
+
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{healthinformation2['Head_Injury'] }}</a>
+<span class="time">Do you have Head Injury?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Head_Injury_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Surgery'] }}</a>
+<span class="time">Did you have surgery?</span>
+</div>
+</div>
+
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Surgery_Type'] }}</a>
+<span class="time">Surgery type?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{healthinformation2['Surgery_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Allergies'] }}</a>
+<span class="time">Do you have Allergies?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Allergies_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['High_Blood_Pressure'] }}</a>
+<span class="time">Do you have High Blood Pressure?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['High_Blood_Pressure_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{healthinformation2['Hypothyroidism'] }}</a>
+<span class="time">Do you have Hypothyroidism?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{healthinformation2['Hypothyroidism_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{healthinformation2['Cancer'] }}</a>
+<span class="time">Do you have Cancer?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Cancer_Type'] }}</a>
+<span class="time">Cancer Type?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Cancer_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Psoriasis'] }}</a>
+<span class="time">Do you have Psoriasis?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Psoriasis_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Heart_Problem'] }}</a>
+<span class="time">Do you have Heart Problem?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Heart_Problem_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Pneumonia'] }}</a>
+<span class="time">Do you have Pneumonia?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Pneumonia_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Epilepsy'] }}</a>
+<span class="time">Do you have Epilepsy?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Epilepsy_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Kidney_Stone'] }}</a>
+<span class="time">Do you have Kidney Stone?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Kidney_Stone_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Juandice'] }}</a>
+<span class="time">Do you have Juandice?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Juandice_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Tuberculosis'] }}</a>
+<span class="time">Do you have Tuberculosis?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Tuberculosis_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Fainting_Spell'] }}</a>
+<span class="time">Do you have Fainting Spell?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Fainting_Spell_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Siezures'] }}</a>
+<span class="time">Do you have Siezures?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Seizures_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Allergies_Seasonal'] }}</a>
+<span class="time">Do you have Allergies Seasonal?</span>
+</div>
+</div>
+<div class="experience-content">
+<div class="timeline-content">
+<a href="#/" class="name">{{ healthinformation2['Allergies_Seasonal_Age'] }}</a>
+<span class="time">What Age?</span>
+</div>
+</div>
+
+    <div class="col-sm-5 col-6 text-end m-b-30">
+{% if studentapproval4.status == 4 %}<a href="/faculty/edit-healthinformation2" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Lifestyle Background Informations</a>
+ {% else %}<a href="/faculty/add-healthinformation2" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Add Lifestyle Background Informations</a>{% endif %}
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<div class="notification-box">
+<div class="msg-sidebar notifications msg-noti">
+<div class="topnav-dropdown-header">
+<span>Messages</span>
+</div>
+<div class="drop-scroll msg-list-scroll" id="msg_list">
+<ul class="list-box">
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">R</span>
+</div>
+<div class="list-body">
+<span class="message-author">Richard Miles </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item new-message">
+<div class="list-left">
+<span class="avatar">J</span>
+</div>
+<div class="list-body">
+<span class="message-author">John Doe</span>
+<span class="message-time">1 Aug</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">T</span>
+</div>
+<div class="list-body">
+<span class="message-author"> Tarah Shropshire </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">M</span>
+</div>
+<div class="list-body">
+<span class="message-author">Mike Litorus</span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">C</span>
+</div>
+<div class="list-body">
+<span class="message-author"> Catherine Manseau </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">D</span>
+</div>
+<div class="list-body">
+<span class="message-author"> Domenic Houston </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">B</span>
+</div>
+<div class="list-body">
+<span class="message-author"> Buster Wigton </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">R</span>
+</div>
+<div class="list-body">
+<span class="message-author"> Rolland Webber </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">C</span>
+</div>
+<div class="list-body">
+<span class="message-author"> Claire Mapes </span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">M</span>
+</div>
+<div class="list-body">
+<span class="message-author">Melita Faucher</span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">J</span>
+</div>
+<div class="list-body">
+<span class="message-author">Jeffery Lalor</span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">L</span>
+</div>
+<div class="list-body">
+<span class="message-author">Loren Gatlin</span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+<li>
+<a href="chat.html">
+<div class="list-item">
+<div class="list-left">
+<span class="avatar">T</span>
+</div>
+<div class="list-body">
+<span class="message-author">Tarah Shropshire</span>
+<span class="message-time">12:28 AM</span>
+<div class="clearfix"></div>
+<span class="message-content">Lorem ipsum dolor sit amet, consectetur adipiscing</span>
+</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div class="topnav-dropdown-footer">
+<a href="chat.html">See all messages</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sidebar-overlay" data-reff=""></div>
+<script data-cfasync="false" src="{{ url_for('static', filename='../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script><script src="{{ url_for('static', filename='assets/js/jquery-3.6.1.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.slimscroll.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/app.js')}}"></script>
+</body>
+
+</html>
